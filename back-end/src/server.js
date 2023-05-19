@@ -23,6 +23,14 @@ async function start() {
 
   app.use("/images", express.static(path.join(__dirname, "../assets")));
 
+  // for front end serving...
+  app.use(
+    express.static(path.resolve(__dirname, "../dist"), {
+      maxAge: "1y",
+      etag: false,
+    })
+  );
+
   // -- Load Data Endpoints -- //
 
   // GET ALL PRODUCTS
@@ -102,8 +110,16 @@ async function start() {
     res.json(populatedCart);
   });
 
+  // Send index.html back for any request not handled above
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../dist/index.html"));
+  });
+
+  // Allow hosting platform to change port - 8000 as backup
+  const port = process.env.PORT || 8000;
+
   // Listen
-  app.listen(8000, () => {
+  app.listen(port, () => {
     console.log("server is listening on port 8000");
   });
 
