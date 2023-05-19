@@ -1,0 +1,30 @@
+mongo cloud user
+UN: robyngilb
+PW: QMvjKfhOUVoYD7hE
+
+ip access list
+98.114.10.40/32
+
+Use this connection string in your application
+mongosh "mongodb+srv://cluster0.knynacd.mongodb.net" --apiVersion 1 --username robyngilb
+
+cluster0 > 
+
+databse:
+fsv-db
+
+collections: 
+products, users
+
+
+$ NODE_OPTIONS=--openssl-legacy-provider npm run serve
+
+// devServer: {
+  //   proxy: {
+  //     "^/api": {
+  //       target: "http://localhost:8000",
+  //       ws: true,
+  //       changeOrigin: true,
+  //     },
+  //   },
+  // },
